@@ -9,14 +9,14 @@ using SegundoRegistro.DAL;
 namespace SegundoRegistro.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20210919181856_Migracion_Inicial")]
+    [Migration("20211016111821_Migracion_Inicial")]
     partial class Migracion_Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.10");
+                .HasAnnotation("ProductVersion", "5.0.11");
 
             modelBuilder.Entity("SegundoRegistro.Entidades.Rol", b =>
                 {
@@ -33,6 +33,28 @@ namespace SegundoRegistro.Migrations
                     b.HasKey("RolID");
 
                     b.ToTable("Rol");
+                });
+
+            modelBuilder.Entity("SegundoRegistro.Entidades.RolesDetalle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("EsAsignado")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PermisoId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("RolId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RolId");
+
+                    b.ToTable("RolesDetalle");
                 });
 
             modelBuilder.Entity("SegundoRegistro.Entidades.Usuario", b =>
@@ -65,6 +87,20 @@ namespace SegundoRegistro.Migrations
                     b.HasKey("UsuarioID");
 
                     b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("SegundoRegistro.Entidades.RolesDetalle", b =>
+                {
+                    b.HasOne("SegundoRegistro.Entidades.Rol", null)
+                        .WithMany("RolesDetalles")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SegundoRegistro.Entidades.Rol", b =>
+                {
+                    b.Navigation("RolesDetalles");
                 });
 #pragma warning restore 612, 618
         }

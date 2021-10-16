@@ -32,8 +32,8 @@ namespace SegundoRegistro.BLL
             }
             return paso;
         }//Listo
-
-        public static bool Modificar(Rol rol)
+        /*
+        public static bool Modificar(Rol rol)//----Modificado
         {
             bool paso = false;
             Contexto contexto = new Contexto();
@@ -52,7 +52,34 @@ namespace SegundoRegistro.BLL
                 contexto.Dispose();
             }
             return paso;
-        }//listar
+        }
+        *///Anterior Modificar
+
+        public static bool Modificar(Rol rol)//----Modificado
+        {   
+            bool paso = false;
+            Contexto contexto = new Contexto();
+            try
+            {
+                contexto.Database.ExecuteSqlRaw($"Delete FROM RolesDetalle Where RolID={rol.RolID}");
+                foreach(var anterior in rol.RolesDetalles)
+                {
+                    contexto.Entry(anterior).State = EntityState.Added;
+                }
+                contexto.Entry(rol).State = EntityState.Modified;
+                paso = (contexto.SaveChanges() > 0);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+            return paso;
+        }
 
         public static bool Existe(int ID)
         {
@@ -60,7 +87,8 @@ namespace SegundoRegistro.BLL
             bool encontrado = false;
             try
             {
-                encontrado = contexto.Rol.Any(e => e.RolID == ID);
+                encontrado = contexto.Rol
+                    .Any(e => e.RolID == ID);
             }
             catch (Exception)
             {
@@ -106,7 +134,7 @@ namespace SegundoRegistro.BLL
             }
             return paso;
         }//Listo
-
+        /*
         public static Rol Buscar(int ID)
         {
             Contexto contexto = new Contexto();
@@ -118,6 +146,28 @@ namespace SegundoRegistro.BLL
             catch (Exception)
             {
 
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+            return rol;
+        }
+        *///Anterior Buscar
+
+        public static Rol Buscar(int ID)//----Modificado
+        {
+            Contexto contexto = new Contexto();
+            Rol rol = new Rol(); 
+            try
+            {
+                rol = contexto.Rol.Include(x => x.RolesDetalles)
+                    .Where(p => p.RolID == ID)
+                    .SingleOrDefault();
+            }
+            catch
+            {
                 throw;
             }
             finally

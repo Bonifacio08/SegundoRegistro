@@ -39,15 +39,44 @@ namespace SegundoRegistro.Migrations
                 {
                     table.PrimaryKey("PK_Usuario", x => x.UsuarioID);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "RolesDetalle",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RolId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PermisoId = table.Column<int>(type: "INTEGER", nullable: false),
+                    EsAsignado = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RolesDetalle", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RolesDetalle_Rol_RolId",
+                        column: x => x.RolId,
+                        principalTable: "Rol",
+                        principalColumn: "RolID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolesDetalle_RolId",
+                table: "RolesDetalle",
+                column: "RolId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Rol");
+                name: "RolesDetalle");
 
             migrationBuilder.DropTable(
                 name: "Usuario");
+
+            migrationBuilder.DropTable(
+                name: "Rol");
         }
     }
 }

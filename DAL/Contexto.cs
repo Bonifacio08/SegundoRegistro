@@ -10,6 +10,7 @@ namespace SegundoRegistro.DAL
 {
     public class Contexto : DbContext
     {
+        //Aqui solo va el nombre de la entidad
         public DbSet<Rol> Rol { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
 

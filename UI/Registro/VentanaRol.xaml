@@ -5,18 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SegundoRegistro.UI.Registro"
         mc:Ignorable="d"
-        Title="VentanaRol" Height="256" Width="364">
-    <Grid>
-        <Label Content="Rol ID:" HorizontalAlignment="Left" Margin="48,12,0,0" VerticalAlignment="Top"/>
-        <Label Content="Fecha de creacion:" HorizontalAlignment="Left" Margin="48,56,0,0" VerticalAlignment="Top"/>
-        <Label Content="Descripcion:" HorizontalAlignment="Left" Margin="48,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.079"/>
-        <TextBox x:Name="TextRolID" Text="{Binding RolID}" HorizontalAlignment="Left" Margin="48,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="TextDescripcion" Text="{Binding Descripcion}" HorizontalAlignment="Left" Margin="48,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
-        <TextBox x:Name="FechaCreacion" Text="{Binding FechaCreacion}" HorizontalAlignment="Left" Margin="48,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Buscar" HorizontalAlignment="Left" Margin="173,33,0,0" VerticalAlignment="Top" Height="28" Width="44" Click="BtnBuscar"/>
-        <Button HorizontalAlignment="Left" Margin="48,176,0,0" VerticalAlignment="Top" Height="28" Width="54" Content="Nuevo" Click="BtnNuevo"/>
-        <Button Content="Guardar" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="54" Margin="105,176,0,0" Click="BtnGuardar"/>
-        <Button Content="Eliminar" HorizontalAlignment="Left" Margin="163,176,0,0" VerticalAlignment="Top" Height="28" Width="54" Click="BtnEliminar"/>
+        Title="VentanaRol" Height="485" Width="504">
+    <Grid Background="#FF5CDEC7" Margin="0,0,0,-6">
+        <Label Content="Rol ID:" HorizontalAlignment="Left" Margin="137,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Fecha de creacion:" HorizontalAlignment="Left" Margin="134,77,0,0" VerticalAlignment="Top"/>
+        <Label Content="Descripcion:" HorizontalAlignment="Left" Margin="137,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.498,0.079"/>
+        <TextBox x:Name="TextRolID" Text="{Binding RolID}" HorizontalAlignment="Left" Margin="185,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="56"/>
+        <TextBox x:Name="TextDescripcion" Text="{Binding Descripcion}" HorizontalAlignment="Left" Margin="137,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+        <Button  HorizontalAlignment="Left" Margin="246,14,0,0" VerticalAlignment="Top" Height="17" Width="21" Click="BtnBuscar">
+            <StackPanel Orientation="Vertical">
+                <Image Source="/Resources/lupa (1).png" Height="13" Width="14" />
+                <Label Content="Buscar"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="92,387,0,0" VerticalAlignment="Top" Height="28" Width="74" Click="BtnNuevo">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/anadir-grupo (1).png" Width="21" />
+                <Label Content="Nuevo"/>
+            </StackPanel>
+        </Button>
+        <Button  HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" Width="74" Margin="172,387,0,0" Click="BtnGuardar">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/boton-guardar.png" Height="20" Width="22" RenderTransformOrigin="-0.306,0.519"/>
+                <Label Content="Guardar" Width="48"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="250,387,0,0" VerticalAlignment="Top" Height="28" Width="76" Click="BtnEliminar">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/quitar-usuario.png" Height="47" Width="18"/>
+                <Label Content="Eliminar"/>
+            </StackPanel>
+        </Button>
+        
+        <Label Content="Asignado:" HorizontalAlignment="Left" Margin="389,33,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="esAsignadoCheck" HorizontalAlignment="Left" Margin="455,40,0,0" VerticalAlignment="Top"/>
+        <DatePicker  x:Name="FechaCreacion" HorizontalAlignment="Left" Margin="137,102,0,0" VerticalAlignment="Top" SelectedDate="{Binding FechaCreacion}"/>
+
+        <GroupBox Header="Detalles de roles" Margin="0,170,0,88">
+            <StackPanel Height="234" Margin="1,-17,0,0">
+                <StackPanel Width="70" Height="44"/>
+                <Button Content="Agregar" HorizontalAlignment="Left" Margin="394,-40,0,0" Width="79" Height="24" Click="BtnAgregar"/>
+            </StackPanel>
+
+        </GroupBox>
+        <DataGrid x:Name="DataGridxx"  Margin="10,208,10,99" ItemsSource="{Binding RolesDetalles}" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="PermisoId" Binding="{Binding PermisoId}"/>
+                <DataGridTextColumn Header="ES Asignado" Binding="{Binding EsAsignado}"/>
+                <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Remover" HorizontalAlignment="Left" Margin="330,387,0,0" VerticalAlignment="Top" Width="76" Height="28" Click="BtnRemover"/>
+        <Label Content="Permiso Id:" HorizontalAlignment="Left" Margin="137,36,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textPermidoId" Text="{Binding PermisoId}" HorizontalAlignment="Left" Margin="208,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="33"/>
+
+
 
     </Grid>
 </Window>

@@ -21,18 +21,35 @@ namespace SegundoRegistro.UI.Registro
     /// </summary>
     public partial class VentanaRol : Window
     {
-        Rol R = new Rol();
+        private Rol R = new Rol();
         public VentanaRol()
         {
             InitializeComponent();
             this.DataContext = R;
+            //Agregado
+            TextRolID.Text = "0";
         }
-
+        
         public void Limpiar()
         {
             this.R = new Rol();
             this.DataContext = R;
         }
+        ///Anterior Limpiar
+
+        private void Cargar()
+        {
+            this.DataContext = null;
+            this.DataContext = R;
+        }
+
+       /* public void Limpiar()//Nuevo limpiar
+        {
+            TextRolID.Text = "0";
+            FechaCreacion.Text = Convert.ToString(DateTime.Now);
+
+
+        }*/
 
         private bool Validar()
         {
@@ -68,30 +85,32 @@ namespace SegundoRegistro.UI.Registro
         //Ojooooooooooooooooooooooooooooooooooooooooooooo
         private void BtnBuscar(object sender, RoutedEventArgs e)
         {
+            if (!Validar())
+                return;
             var rol = RolBLL.Buscar(Convert.ToInt32(TextRolID.Text));
 
             if (rol != null)
                 this.R = rol;
             else
                 this.R = new Rol();
-                /*
-                MessageBox.Show("Este ID no existe", "Fallo",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-                */
-                
+            /*
+            MessageBox.Show("Este ID no existe", "Fallo",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            */
+
 
             this.DataContext = this.R;
-                
-                
-                
+
+
+
         }
 
         private void BtnNuevo(object sender, RoutedEventArgs e)
         {
             Limpiar();
         }
-        //Biding
-        
+
+
 
         private void BtnEliminar(object sender, RoutedEventArgs e)
         {
@@ -107,7 +126,64 @@ namespace SegundoRegistro.UI.Registro
             }
             else
                 MessageBox.Show("No fue posible eliminar", "Fallo",
-                    MessageBoxButton.OK, MessageBoxImage.Error);   
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void BtnRemover(object sender, RoutedEventArgs e)
+        {
+           // DataGridxx.SelectedIndex = R.RolID;
+            if (DataGridxx.Items.Count >= 1 && DataGridxx.SelectedIndex <= DataGridxx.Items.Count - 1)
+            {
+                R.RolesDetalles.RemoveAt(DataGridxx.SelectedIndex);
+                Cargar();
+            }
+            else
+            {
+                MessageBox.Show("No fue posible remover", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            /*
+            if(TextRolID.Text.Length != DataGridxx.SelectedIndex + 1)
+            {
+                MessageBox.Show("Este indice no existe", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+            if (TextRolID.Text != null)
+            {               
+                
+                //MessageBox.Show($"Este fue el indice buscado = {DataGridxx.SelectedIndex + 1}");
+                R.RolesDetalles.RemoveAt(DataGridxx.SelectedIndex + 1);
+                Cargar();
+            }     
+            */
+        }
+
+        private void BtnAgregar(object sender, RoutedEventArgs e)
+        {
+            if (R.RolID == 0)
+            {
+                MessageBox.Show("RolId vacio", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (textPermidoId.Text.Length == 0)
+            {
+                MessageBox.Show("PermisoId vacio", "Fallo",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+    
+            else
+            {
+                R.RolesDetalles.Add(new RolesDetalle(R.RolID, Convert.ToInt32(textPermidoId.Text), esAsignadoCheck.IsChecked.Value));
+                Cargar();
+
+                textPermidoId.Focus();
+                textPermidoId.Clear();
+                //TextRolID.Clear();
+                textPermidoId.Focus();
+            }
+
+            
         }
     }
 }

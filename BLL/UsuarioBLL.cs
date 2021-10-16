@@ -101,13 +101,6 @@ namespace SegundoRegistro.BLL
                     contexto.Usuario.Remove(usuario);//Remover la cantidad
                     paso = contexto.SaveChanges() > 0;
                 }
-                /*
-                else
-                {
-                    MessageBox.Show("Registro esta Vacio", "Exito",
-                     MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                */
 
             }
             catch (Exception)

@@ -22,7 +22,7 @@ namespace SegundoRegistro.UI.Registro
     public partial class VentanaUsuario : Window
     {
         private Usuario U = new Usuario();
-        public VentanaUsuario()
+        public VentanaUsuario()//Porque
         {
             InitializeComponent();
             this.DataContext = U;
@@ -48,13 +48,6 @@ namespace SegundoRegistro.UI.Registro
 
         private void BtnBuscar(object sender, RoutedEventArgs e)
         {
-            /*if (!Validar())
-            {
-                return;
-            }
-            */
-
-            //var paso = UsuarioBLL.Guardar(U);
 
             var usuario = UsuarioBLL.Buscar(Convert.ToInt32(TextUsuarioID.Text));
 
@@ -64,17 +57,6 @@ namespace SegundoRegistro.UI.Registro
                 this.U = new Usuario();
 
             this.DataContext = this.U;
-            /*
-            if (paso)
-            {
-                //Limpiar();
-                MessageBox.Show("Guardado!!", "Exito",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-                MessageBox.Show("Guardado Negado", "Fallo",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            */
         }
 
 
@@ -116,6 +98,11 @@ namespace SegundoRegistro.UI.Registro
             else
                 MessageBox.Show("No fue posible eliminar", "Fallo",
                     MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void CheckBox_Checked()
+        {
+
         }
     }
 }
