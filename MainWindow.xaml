@@ -18,6 +18,10 @@
                     <MenuItem x:Name="Consulta" Header="Consulta" />
                 </MenuItem>
 
+                <MenuItem Header="Aportes" Click="Aporte_Click">
+                    <MenuItem x:Name="Aporte" Header="Aporte" />
+                </MenuItem>
+
                 <MenuItem Header="Ayuda">
                     <Menu/>
                 </MenuItem>

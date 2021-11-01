@@ -32,28 +32,7 @@ namespace SegundoRegistro.BLL
             }
             return paso;
         }//Listo
-        /*
-        public static bool Modificar(Rol rol)//----Modificado
-        {
-            bool paso = false;
-            Contexto contexto = new Contexto();
-            try
-            {
-                contexto.Entry(rol).State = EntityState.Modified;
-                paso = contexto.SaveChanges() > 0;
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
-            finally
-            {
-                contexto.Dispose();
-            }
-            return paso;
-        }
-        *///Anterior Modificar
 
         public static bool Modificar(Rol rol)//----Modificado
         {   
@@ -134,27 +113,6 @@ namespace SegundoRegistro.BLL
             }
             return paso;
         }//Listo
-        /*
-        public static Rol Buscar(int ID)
-        {
-            Contexto contexto = new Contexto();
-            Rol rol;
-            try
-            {
-                rol = contexto.Rol.Find(ID);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                contexto.Dispose();
-            }
-            return rol;
-        }
-        *///Anterior Buscar
 
         public static Rol Buscar(int ID)//----Modificado
         {

@@ -35,21 +35,12 @@ namespace SegundoRegistro.UI.Registro
             this.R = new Rol();
             this.DataContext = R;
         }
-        ///Anterior Limpiar
 
         private void Cargar()
         {
             this.DataContext = null;
             this.DataContext = R;
         }
-
-       /* public void Limpiar()//Nuevo limpiar
-        {
-            TextRolID.Text = "0";
-            FechaCreacion.Text = Convert.ToString(DateTime.Now);
-
-
-        }*/
 
         private bool Validar()
         {
@@ -82,7 +73,7 @@ namespace SegundoRegistro.UI.Registro
                 MessageBox.Show("Guardado Negado", "Fallo",
                     MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        //Ojooooooooooooooooooooooooooooooooooooooooooooo
+
         private void BtnBuscar(object sender, RoutedEventArgs e)
         {
             if (!Validar())
@@ -91,26 +82,18 @@ namespace SegundoRegistro.UI.Registro
 
             if (rol != null)
                 this.R = rol;
+             
             else
-                this.R = new Rol();
-            /*
-            MessageBox.Show("Este ID no existe", "Fallo",
-                MessageBoxButton.OK, MessageBoxImage.Information);
-            */
+                MessageBox.Show("No encontrado", "Fallo", MessageBoxButton.OK, MessageBoxImage.Warning);
 
 
             this.DataContext = this.R;
-
-
-
         }
 
         private void BtnNuevo(object sender, RoutedEventArgs e)
         {
             Limpiar();
         }
-
-
 
         private void BtnEliminar(object sender, RoutedEventArgs e)
         {
@@ -131,7 +114,6 @@ namespace SegundoRegistro.UI.Registro
 
         private void BtnRemover(object sender, RoutedEventArgs e)
         {
-           // DataGridxx.SelectedIndex = R.RolID;
             if (DataGridxx.Items.Count >= 1 && DataGridxx.SelectedIndex <= DataGridxx.Items.Count - 1)
             {
                 R.RolesDetalles.RemoveAt(DataGridxx.SelectedIndex);
@@ -142,21 +124,6 @@ namespace SegundoRegistro.UI.Registro
                 MessageBox.Show("No fue posible remover", "Fallo",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            /*
-            if(TextRolID.Text.Length != DataGridxx.SelectedIndex + 1)
-            {
-                MessageBox.Show("Este indice no existe", "Fallo",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            
-            if (TextRolID.Text != null)
-            {               
-                
-                //MessageBox.Show($"Este fue el indice buscado = {DataGridxx.SelectedIndex + 1}");
-                R.RolesDetalles.RemoveAt(DataGridxx.SelectedIndex + 1);
-                Cargar();
-            }     
-            */
         }
 
         private void BtnAgregar(object sender, RoutedEventArgs e)

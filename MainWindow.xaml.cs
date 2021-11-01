@@ -37,5 +37,11 @@ namespace SegundoRegistro
             VentanaUsuario ventanaUSUARIO = new VentanaUsuario();
             ventanaUSUARIO.Show();
         }
+
+        private void Aporte_Click(object sender, RoutedEventArgs e)
+        {
+            VentanaAportes ventanaAPORTE = new VentanaAportes();
+            ventanaAPORTE.Show();
+        }
     }
 }

@@ -51,8 +51,9 @@
         <DataGrid x:Name="DataGridxx"  Margin="10,208,10,99" ItemsSource="{Binding RolesDetalles}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="PermisoId" Binding="{Binding PermisoId}"/>
-                <DataGridTextColumn Header="ES Asignado" Binding="{Binding EsAsignado}"/>
                 <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}"/>
+                <DataGridTextColumn Header="Es Asignado" Binding="{Binding EsAsignado}"/>
+                <DataGridTextColumn Header="Veces Asignado" Binding="{Binding VecesAsignado}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Remover" HorizontalAlignment="Left" Margin="330,387,0,0" VerticalAlignment="Top" Width="76" Height="28" Click="BtnRemover"/>
