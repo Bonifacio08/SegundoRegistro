@@ -9,7 +9,7 @@ using SegundoRegistro.DAL;
 namespace SegundoRegistro.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20211016111821_Migracion_Inicial")]
+    [Migration("20211108163828_Migracion_Inicial")]
     partial class Migracion_Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,6 +17,53 @@ namespace SegundoRegistro.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.11");
+
+            modelBuilder.Entity("SegundoRegistro.Entidades.Aportes", b =>
+                {
+                    b.Property<int>("AporteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Concepto")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Monto")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PersonaId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AporteId");
+
+                    b.ToTable("Aportes");
+                });
+
+            modelBuilder.Entity("SegundoRegistro.Entidades.AportesDetalle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AporteId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DetalleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Monto")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AporteId");
+
+                    b.HasIndex("DetalleId");
+
+                    b.ToTable("AportesDetalle");
+                });
 
             modelBuilder.Entity("SegundoRegistro.Entidades.Rol", b =>
                 {
@@ -69,6 +116,9 @@ namespace SegundoRegistro.Migrations
                     b.Property<string>("Alias")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("AporteId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Clave")
                         .HasColumnType("TEXT");
 
@@ -86,7 +136,38 @@ namespace SegundoRegistro.Migrations
 
                     b.HasKey("UsuarioID");
 
+                    b.HasIndex("AporteId");
+
                     b.ToTable("Usuario");
+
+                    b.HasData(
+                        new
+                        {
+                            UsuarioID = 1,
+                            Activo = 0,
+                            Clave = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+                            Email = "user01",
+                            FechaIngreso = new DateTime(2021, 11, 8, 12, 38, 28, 165, DateTimeKind.Local).AddTicks(8803),
+                            Nombre = "Danilo Gabriel B.",
+                            RolID = 0
+                        });
+                });
+
+            modelBuilder.Entity("SegundoRegistro.Entidades.AportesDetalle", b =>
+                {
+                    b.HasOne("SegundoRegistro.Entidades.Aportes", null)
+                        .WithMany("Detalle")
+                        .HasForeignKey("AporteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SegundoRegistro.Entidades.Aportes", "Aportes")
+                        .WithMany()
+                        .HasForeignKey("DetalleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Aportes");
                 });
 
             modelBuilder.Entity("SegundoRegistro.Entidades.RolesDetalle", b =>
@@ -96,6 +177,20 @@ namespace SegundoRegistro.Migrations
                         .HasForeignKey("RolId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SegundoRegistro.Entidades.Usuario", b =>
+                {
+                    b.HasOne("SegundoRegistro.Entidades.Aportes", "Aporte")
+                        .WithMany()
+                        .HasForeignKey("AporteId");
+
+                    b.Navigation("Aporte");
+                });
+
+            modelBuilder.Entity("SegundoRegistro.Entidades.Aportes", b =>
+                {
+                    b.Navigation("Detalle");
                 });
 
             modelBuilder.Entity("SegundoRegistro.Entidades.Rol", b =>

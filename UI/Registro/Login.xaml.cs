@@ -1,6 +1,5 @@
 ﻿using SegundoRegistro.BLL;
 using SegundoRegistro.Entidades;
-using SegundoRegistro.UI.Registro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,31 +12,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Menu = SegundoRegistro.UI.Registro.Menu;
 
-namespace SegundoRegistro
+
+
+namespace SegundoRegistro.UI.Registro
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Login : Window
     {
-        public MainWindow()
-        {
-            Login lg = new Login();
-            //lg.ShowDialog();
-            InitializeComponent();
-        }
         Usuario usuario = new Usuario();
-        //MainWindow Principal = new MainWindow();
+       // MainWindow Principal = new MainWindow();
 
-        /*public Login()
+        public Login()
         {
             InitializeComponent();
         }
-        */
 
         private void IngresarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -45,9 +37,8 @@ namespace SegundoRegistro
 
             if (paso)
             {
-                Menu menu = new UI.Registro.Menu();
-                menu.Show();
                 this.Close();
+                //Principal.Show();
             }
             else
             {
@@ -62,23 +53,6 @@ namespace SegundoRegistro
             Application.Current.Shutdown();
         }
 
-        /*
-        private void Registro_Click(object sender, RoutedEventArgs e)
-        {
-            VentanaRol ventanaROL = new VentanaRol();
-            ventanaROL.Show();
-        }
-
-        private void Usuario_Click(object sender, RoutedEventArgs e)
-        {
-            VentanaUsuario ventanaUSUARIO = new VentanaUsuario();
-            ventanaUSUARIO.Show();
-        }
-       /* private void Aporte_Click(object sender, RoutedEventArgs e)
-        {
-            VentanaAportes ventanaAPORTE = new VentanaAportes();
-            ventanaAPORTE.Show();
-        }
-       */
+        
     }
 }

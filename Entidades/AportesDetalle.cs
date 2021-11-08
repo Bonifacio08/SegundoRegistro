@@ -12,8 +12,10 @@ namespace SegundoRegistro.Entidades
         public int Id { get; set; }
         public int AporteId { get; set; }
         public int DetalleId { get; set; }
+        public int Monto { get; set; }
 
         [ForeignKey("DetalleId")]
-        public Usuario Usuario { get; set; }//No estoy seguro si es usurario
+        //public Usuario Usuario { get; set; }//No estoy seguro si es usurario
+        public Aportes Aportes { get; set; }
     }
 }

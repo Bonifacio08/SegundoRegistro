@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,5 +19,8 @@ namespace SegundoRegistro.Entidades
         public string Clave { get; set; }
         public int Activo { get; set; }
         public DateTime FechaIngreso { get; set; } = DateTime.Now;
+
+        [ForeignKey("AporteId")]
+        public virtual Aportes Aporte { get; set; }
     }
 }
